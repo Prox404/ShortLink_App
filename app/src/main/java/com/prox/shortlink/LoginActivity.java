@@ -3,6 +3,7 @@ package com.prox.shortlink;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -63,10 +64,21 @@ public class LoginActivity extends AppCompatActivity {
                         // Đăng nhập thành công, chuyển đến Activity home
                         String userId = loginResponse.getUserData().getId();
                         String username = loginResponse.getUserData().getUsername();
+                        String refreshToken = loginResponse.getRefreshToken();
+                        String accessToken = loginResponse.getAccessToken();
+
+
+                        //Save to SharedPreference
+                        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("id", userId);
+                        editor.putString("username", username);
+                        editor.putString("refreshToken", refreshToken);
+                        editor.putString("accessToken", accessToken);
+                        editor.apply();
+
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("userId", userId);
-                        intent.putExtra("username", username);
                         startActivity(intent);
                         finish(); // Kết thúc Activity đăng nhập
                     } else {

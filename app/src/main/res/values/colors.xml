@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#f3ee77</color>
+    <color name="colorPrimaryDark">#f3ee77</color>
+    <color name="navigationBarColor">#B1AC34</color>
+    <color name="colorAccent">#f3ee77</color>
+    <color name="textColorPrimary">#000000</color>
 </resources>
