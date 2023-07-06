@@ -14,7 +14,7 @@
         <item name="android:navigationBarColor">@color/navigationBarColor</item>
         <item name="android:navigationIcon">@color/textColorPrimary</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:windowLightNavigationBar" >true</item>
     </style>
 
     <style name="NunitoTextViewStyle" parent="android:Widget.TextView">
