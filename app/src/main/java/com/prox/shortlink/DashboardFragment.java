@@ -1,12 +1,16 @@
 package com.prox.shortlink;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +23,8 @@ public class DashboardFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private TextView tvNumberLinks, tvNumberUser, tvNumberLinkOfUser;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -58,7 +64,29 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        tvNumberLinks = view.findViewById(R.id.tvNumberLinks);
+        tvNumberUser = view.findViewById(R.id.tvNumberUser);
+        tvNumberLinkOfUser = view.findViewById(R.id.tvNumberLinkOfUser);
+
+        tvNumberLinks.setText("@@");
+        tvNumberUser.setText("@@");
+        tvNumberLinkOfUser.setText("@@");
+        Log.i("dashboard", "call");
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        displayDataFromSharedPreferences();
+        return view;
+    }
+
+    private void displayDataFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("OverviewData", MODE_PRIVATE);
+        int numberLinks = sharedPreferences.getInt("numberLinks", 0);
+        int numberUser = sharedPreferences.getInt("numberUser", 0);
+        int numberLinkOfUser = sharedPreferences.getInt("numberLinkOfUser", 0);
+
+        tvNumberLinks.setText(String.valueOf(numberLinks));
+        tvNumberUser.setText(String.valueOf(numberUser));
+        tvNumberLinkOfUser.setText(String.valueOf(numberLinkOfUser));
     }
 }
