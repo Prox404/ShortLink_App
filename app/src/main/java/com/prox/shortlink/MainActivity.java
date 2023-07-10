@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-//        String Bearer = sharedPreferences.getString("accessToken");
         String authorization = "Bearer " + sharedPreferences.getString("accessToken", null); // Thay YOUR_AUTH_TOKEN bằng token của bạn
         Log.i("AppPrefs_access_token", authorization);
 
