@@ -65,7 +65,7 @@ public class LinkFragment extends Fragment {
         apiService = RetrofitClient.getClient().create(ApiService.class);
 
         // Lấy token từ SharedPreferences
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("AppPref", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("AppPrefs", MODE_PRIVATE);
         authorization = "Bearer " + sharedPreferences.getString("accessToken", null);
     }
 
@@ -94,7 +94,7 @@ public class LinkFragment extends Fragment {
         if (currentPage > totalPages) {
             return;
         }
-
+        Log.i("Author", authorization);
         Call<GetAllLinkResponse> call = apiService.getLinks(authorization, currentPage);
         call.enqueue(new Callback<GetAllLinkResponse>() {
             @Override
