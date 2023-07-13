@@ -1,6 +1,8 @@
 package com.prox.shortlink;
 
 import com.google.gson.annotations.SerializedName;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Link {
     @SerializedName("_id")
@@ -104,4 +106,18 @@ public class Link {
     }
 
     // Các phương thức khác (nếu cần)
+
+    public String getDomainName(){
+        try {
+            URL uri = new URL(link);
+            String domain = uri.getHost();
+            if (domain != null && domain.startsWith("www.")) {
+                domain = domain.substring(4);
+            }
+            return domain;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

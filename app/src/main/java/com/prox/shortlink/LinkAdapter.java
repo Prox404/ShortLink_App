@@ -32,7 +32,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.LinkViewHolder
     public void onBindViewHolder(@NonNull LinkViewHolder holder, int position) {
         Link link = linkList.get(position);
         holder.tvShortLink.setText(link.getShortLink());
-        holder.tvLink.setText(link.getLink());
+        holder.tvLink.setText(link.getDomainName());
 
         // Xử lý sự kiện khi nút chỉnh sửa được click
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
