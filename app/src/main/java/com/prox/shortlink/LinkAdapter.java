@@ -1,6 +1,7 @@
 package com.prox.shortlink;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -28,11 +30,14 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.LinkViewHolder
         return new LinkViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull LinkViewHolder holder, int position) {
         Link link = linkList.get(position);
         holder.tvShortLink.setText(link.getShortLink());
         holder.tvLink.setText(link.getDomainName());
+        holder.tvCreatedAt.setText(link.getTimeAgo());
+        holder.tvPrivacy.setText(link.getPrivacy());
 
         // Xử lý sự kiện khi nút chỉnh sửa được click
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +62,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.LinkViewHolder
     }
 
     public class LinkViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvShortLink, tvLink;
+        private TextView tvShortLink, tvLink, tvCreatedAt, tvPrivacy;
         private Button btnEdit, btnDelete;
 
         public LinkViewHolder(@NonNull View itemView) {
@@ -66,6 +71,8 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.LinkViewHolder
             tvLink = itemView.findViewById(R.id.tvLink);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvCreatedAt = itemView.findViewById(R.id.tv_createdAt);
+            tvPrivacy =  itemView.findViewById(R.id.tv_privacy);
         }
     }
 }

@@ -1,8 +1,17 @@
 package com.prox.shortlink;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.gson.annotations.SerializedName;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Link {
     @SerializedName("_id")
@@ -118,6 +127,35 @@ public class Link {
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getTimeAgo(){
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.parse(createdAt, DateTimeFormatter.ISO_DATE_TIME);
+
+        Duration duration = Duration.between(dateTime, currentTime);
+
+        long years = duration.toDays() / 365;
+        long months = duration.toDays() / 30;
+        long days = duration.toDays();
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes();
+        long seconds = duration.getSeconds();
+
+        if (years > 0) {
+            return years + (years == 1 ? " year ago" : " years ago");
+        } else if (months > 0) {
+            return months + (months == 1 ? " month ago" : " months ago");
+        } else if (days > 0) {
+            return days + (days == 1 ? " day ago" : " days ago");
+        } else if (hours > 0) {
+            return hours + (hours == 1 ? " hour ago" : " hours ago");
+        } else if (minutes > 0) {
+            return minutes + (minutes == 1 ? " minute ago" : " minutes ago");
+        } else {
+            return "a few seconds ago";
         }
     }
 }
