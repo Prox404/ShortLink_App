@@ -84,18 +84,17 @@ public class LinkFragment extends Fragment {
         recyclerView.setAdapter(linkAdapter);
 
         // Gọi API để lấy danh sách link
-        getLinks();
+        getAllLinks();
 
         return view;
     }
 
-    private void getLinks() {
-        // Kiểm tra trang hiện tại có vượt quá tổng số trang hay không
-        if (currentPage > totalPages) {
-            return;
-        }
-        Log.i("Author", authorization);
-        Call<GetAllLinkResponse> call = apiService.getLinks(authorization, currentPage);
+    private void getAllLinks() {
+        getLinks(1);
+    }
+
+    private void getLinks(int page) {
+        Call<GetAllLinkResponse> call = apiService.getLinks(authorization, page);
         call.enqueue(new Callback<GetAllLinkResponse>() {
             @Override
             public void onResponse(Call<GetAllLinkResponse> call, Response<GetAllLinkResponse> response) {
@@ -104,13 +103,18 @@ public class LinkFragment extends Fragment {
                     if (linkResponse != null) {
                         // Lấy dữ liệu từ Response
                         List<Link> links = linkResponse.getLinks();
-                        currentPage = linkResponse.getCurrentPage();
-                        totalPages = linkResponse.getTotalPages();
-                        totalLinks = linkResponse.getTotalLinks();
 
                         // Cập nhật danh sách link và hiển thị
                         linkList.addAll(links);
                         linkAdapter.notifyDataSetChanged();
+
+                        int currentPage = linkResponse.getCurrentPage();
+                        int totalPages = linkResponse.getTotalPages();
+
+                        // Gọi API cho trang tiếp theo nếu còn trang
+                        if (currentPage < totalPages) {
+                            getLinks(currentPage + 1);
+                        }
                     }
                 } else {
                     Log.e("LinkFragment", "Failed to get links: " + response.message());
