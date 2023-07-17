@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new LinkFragment();
                 loadFragment(fragment);
                 return true;
-            } else if (itemId == R.id.navigation_contact) {
-                fragment = new ContactFragment();
-                loadFragment(fragment);
-                return true;
-            } else if (itemId == R.id.navigation_about) {
-                fragment = new AboutFragment();
+            }else if (itemId == R.id.navigation_setting) {
+                    fragment = new SettingFragment();
+                    loadFragment(fragment);
+                    return true;
+            }else if (itemId == R.id.navigation_add_link) {
+                fragment = new AddLinkFragment();
                 loadFragment(fragment);
                 return true;
             } else {

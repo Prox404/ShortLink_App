@@ -7,16 +7,16 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f2f1f7"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
@@ -24,14 +24,25 @@
 
         </LinearLayout>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="409dp"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#faf7f5"
-            app:menu="@menu/navigation" />
+            android:layout_gravity="bottom|center"
+            android:background="@color/transparent">
 
-    </LinearLayout>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bottom_navigation_bar_bg"
+                app:elevation="0dp"
+                app:itemIconTint="@drawable/selector_stock_bottom_nav_view"
+                app:itemTextColor="@drawable/selector_stock_bottom_nav_view"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/navigation" />
+        </FrameLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,4 +29,5 @@
         <item name="android:fontFamily">@font/nunito_regular</item>
         <item name="android:background">@drawable/rounded_btn</item>
     </style>
+
 </resources>

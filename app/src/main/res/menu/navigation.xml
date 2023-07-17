@@ -11,12 +11,14 @@
         android:title="@string/title_link" />
 
     <item
-        android:id="@+id/navigation_contact"
-        android:icon="@drawable/contact"
-        android:title="@string/title_contact" />
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/setting"
+        android:title="@string/title_setting" />
 
     <item
-        android:id="@+id/navigation_about"
-        android:icon="@drawable/about"
-        android:title="@string/title_about" />
+        android:id="@+id/navigation_add_link"
+        android:icon="@drawable/add"
+        android:title="@string/title_add_link" />
+
+
 </menu>

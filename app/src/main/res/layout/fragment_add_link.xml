@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddLinkFragment">
+
+
+    <EditText
+        android:id="@+id/editTextLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Link" />
+
+    <EditText
+        android:id="@+id/editTextShortLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Short Link" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password" />
+
+    <Spinner
+        android:id="@+id/spinnerPrivacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/privacy_options" />
+
+    <Button
+        android:id="@+id/buttonStore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Store" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

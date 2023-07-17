@@ -24,4 +24,14 @@ public interface ApiService {
             @Header("Authorization") String authorization,
             @Query("page") int page
     );
+
+    @FormUrlEncoded
+    @POST("links/store")
+    Call<StoreLinkResponse> storeLink(
+            @Header("Authorization") String authorization,
+            @Field("link") String link,
+            @Field("short_link") String shortLink,
+            @Field("password") String password,
+            @Field("privacy") String privacy
+    );
 }
