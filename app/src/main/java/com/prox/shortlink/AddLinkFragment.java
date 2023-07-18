@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,9 +94,11 @@ public class AddLinkFragment extends Fragment {
                     if (linkResponse != null) {
                         // Hiển thị thông tin link vừa nhập ra
                         Link storedLink = linkResponse.getLink();
-                        textViewResult.setText("Short Link: " + storedLink.getShortLink() +
+                        String message = "Short Link: " + storedLink.getShortLink() +
                                 "\nPrivacy: " + storedLink.getPrivacy() +
-                                "\nLink: " + storedLink.getLink());
+                                "\nLink: " + storedLink.getLink();
+
+                        showAlertDialog("Link Stored", message);
 
                         // Lưu link vào bộ nhớ tạm (SharedPreferences hoặc nơi khác)
                         saveLinkToMemory(storedLink);
@@ -103,8 +107,10 @@ public class AddLinkFragment extends Fragment {
                     // Xử lý khi yêu cầu không thành công (lỗi server, lỗi dữ liệu, ...)
                     Gson gson = new Gson();
                     try {
-                        StoreLinkResponse storeLinkResponse = gson.fromJson(response.errorBody().string(), StoreLinkResponse.class);
-                        textViewResult.setText("Failed to store link: " + storeLinkResponse.getError());
+                        ErrorResponse errorResponse = gson.fromJson(response.errorBody().string(), ErrorResponse.class);
+                        String error = "Failed to store link: " + errorResponse.getError().getMessage();
+
+                        showAlertDialog("Error", error);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -114,9 +120,19 @@ public class AddLinkFragment extends Fragment {
             @Override
             public void onFailure(Call<StoreLinkResponse> call, Throwable t) {
                 // Xử lý khi có lỗi kết nối hoặc lỗi xử lý yêu cầu
-                textViewResult.setText("Error: " + t.getMessage());
+                String error = "Error: " + t.getMessage();
+
+                showAlertDialog("Error", error);
             }
         });
+    }
+
+    private void showAlertDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 
     private void saveLinkToMemory(Link link) {
