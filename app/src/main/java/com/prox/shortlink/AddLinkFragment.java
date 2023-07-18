@@ -1,6 +1,9 @@
 package com.prox.shortlink;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -98,7 +101,7 @@ public class AddLinkFragment extends Fragment {
                                 "\nPrivacy: " + storedLink.getPrivacy() +
                                 "\nLink: " + storedLink.getLink();
 
-                        showAlertDialog("Link Stored", message);
+                        showAlertDialog("Link Stored", message, storedLink.getShortLink());
 
                         // Lưu link vào bộ nhớ tạm (SharedPreferences hoặc nơi khác)
                         saveLinkToMemory(storedLink);
@@ -133,6 +136,27 @@ public class AddLinkFragment extends Fragment {
                 .setMessage(message)
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    private void showAlertDialog(String title, String message, String shortLink) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Copy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        copyToClipboard(shortLink);
+                    }
+                })
+                .setNegativeButton("OK", null)
+                .show();
+    }
+
+    private void copyToClipboard(String text) {
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        String link  = "https://pr0x.me/" + text;
+        ClipData clip = ClipData.newPlainText("Link", link);
+        clipboard.setPrimaryClip(clip);
     }
 
     private void saveLinkToMemory(Link link) {
