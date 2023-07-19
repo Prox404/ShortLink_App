@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -13,7 +14,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Link {
+public class Link implements Serializable {
     @SerializedName("_id")
     private String id;
 
