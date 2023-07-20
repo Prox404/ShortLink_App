@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.prox.shortlink.response.ErrorResponse;
+import com.prox.shortlink.response.StoreLinkResponse;
 
 import java.io.IOException;
 
@@ -77,6 +79,7 @@ public class AddLinkFragment extends Fragment {
                 String shortLink = editTextShortLink.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String privacy = spinnerPrivacy.getSelectedItem().toString().toLowerCase();
+
 
                 // Gọi phương thức lưu trữ link
                 storeLink(link, shortLink, password, privacy);

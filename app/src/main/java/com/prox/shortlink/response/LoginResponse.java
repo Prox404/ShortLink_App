@@ -1,6 +1,8 @@
-package com.prox.shortlink;
+package com.prox.shortlink.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.prox.shortlink.UserData;
+
 public class LoginResponse {
     @SerializedName("data")
     private UserData userData;

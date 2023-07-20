@@ -1,4 +1,4 @@
-package com.prox.shortlink;
+package com.prox.shortlink.response;
 
 import com.google.gson.annotations.SerializedName;
 
