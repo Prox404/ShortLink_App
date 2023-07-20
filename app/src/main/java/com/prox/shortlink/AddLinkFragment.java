@@ -76,7 +76,7 @@ public class AddLinkFragment extends Fragment {
                 String link = editTextLink.getText().toString();
                 String shortLink = editTextShortLink.getText().toString();
                 String password = editTextPassword.getText().toString();
-                String privacy = spinnerPrivacy.getSelectedItem().toString();
+                String privacy = spinnerPrivacy.getSelectedItem().toString().toLowerCase();
 
                 // Gọi phương thức lưu trữ link
                 storeLink(link, shortLink, password, privacy);
